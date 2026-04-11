@@ -351,7 +351,7 @@ class ToolRegistry:
                     
                     # Use KnowledgeTool for all skills
                     skill_logger.info(f"[INFO] Using KnowledgeTool for {skill.name}")
-                    knowledge_tool = KnowledgeTool(skill)
+                    knowledge_tool = KnowledgeTool(skill, skill_folder)
                     tool_info = knowledge_tool.to_tool_info()
                     
                     self.tools[tool_info.name] = tool_info

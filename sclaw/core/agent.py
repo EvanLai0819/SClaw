@@ -573,14 +573,18 @@ def get_agent() -> Agent:
 
         tools = get_tool_registry()
 
-        # Load skills from built-in and user directories
+        # Load skills from built-in, user, and workspace directories
         from pathlib import Path
 
         builtin_skills = Path(__file__).parent.parent / "skills"
         user_skills = Path.home() / ".sclaw" / "skills"
+        user_workspace_skills = Path.home() / ".sclaw" / "workspace" / "skills"
+        workspace_skills = Path.cwd() / "skills"
 
         tools.load_skills(str(builtin_skills), log_config=log_config)
         tools.load_skills(str(user_skills), log_config=log_config)
+        tools.load_skills(str(user_workspace_skills), log_config=log_config)
+        tools.load_skills(str(workspace_skills), log_config=log_config)
 
         _agent = Agent(
             llm=get_llm_client(),
